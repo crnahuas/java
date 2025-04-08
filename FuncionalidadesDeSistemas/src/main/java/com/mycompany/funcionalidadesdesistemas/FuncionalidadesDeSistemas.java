@@ -56,7 +56,7 @@ public class FuncionalidadesDeSistemas {
                 // Elegir asiento
                 System.out.println();
                 System.out.println("----- Reserva tu asiento -----");
-                System.out.println("Elige tu asiento (ejemplo: A2): ");
+                System.out.print("Elige tu asiento (ejemplo: A2): ");
                 String asiento = scanner.nextLine().toUpperCase();
 
                 if (!asiento.matches("^[A-C][1-5]$")) {
@@ -74,9 +74,21 @@ public class FuncionalidadesDeSistemas {
                     // Edad
                     System.out.println();
                     System.out.println("----- Edad -----");
-                    System.out.print("¿Cuántos años tienes?: ");
-                    int edad = scanner.nextInt();
-                    scanner.nextLine();
+
+                    int edad = -1;
+                    while (edad <= 0) {
+                        System.out.print("Indica tu edad: ");
+                        if (scanner.hasNextInt()) {
+                            edad = scanner.nextInt();
+                            scanner.nextLine();
+                            if (edad <= 0) {
+                                System.out.println("Por favor, ingresa una edad válida.");
+                            }
+                        } else {
+                            System.out.println("Por favor, ingresa una edad válida.");
+                            scanner.nextLine();
+                        }
+                    }
 
                     // Estudiante
                     System.out.println();
@@ -103,23 +115,27 @@ public class FuncionalidadesDeSistemas {
                     System.out.println("Precio normal: $" + precioBase);
                     System.out.println("Descuento aplicado: " + (descuento * 100) + "%");
                     System.out.println("Total a pagar: $" + precioFinal);
-                    
+
                     // Otra compra
                     System.out.println();
                     System.out.print("¿Quieres comprar otro asiento? (sí/no): ");
                     String respuesta = scanner.nextLine().toLowerCase();
                     if (respuesta.equals("no") || respuesta.equals("n")) {
                         continuar = false;
+                        System.out.println();
                         System.out.println("Gracias por usar el sistema del Teatro Moro. ¡Hasta pronto!");
                     }
                 } else {
+                    System.out.println();
                     System.out.println("Ese asiento ya está reservado. Por favor, elige otro.");
                 }
 
             } else if (opcion == 2) {
                 continuar = false;
+                System.out.println();
                 System.out.println("Gracias por visitar el Teatro Moro. ¡Te esperamos otra vez!");
             } else {
+                System.out.println();
                 System.out.println("Esa opción no existe. Por favor, elige 1 o 2.");
             }
         }
